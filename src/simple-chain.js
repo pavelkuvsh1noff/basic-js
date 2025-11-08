@@ -6,26 +6,33 @@ const { NotImplementedError } = require('../lib');
  *
  */
 const chainMaker = {
+  memChain: [],
   getLength() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    return this.memChain.length;
   },
-  addLink(/* value */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+  addLink(value) {
+    if (value === undefined) value = '';
+    this.memChain.push(`( ${value} )`);
+    return this;
   },
-  removeLink(/* position */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+  removeLink(position) {
+    let memChainPos = position - 1;
+    if(!this.memChain[memChainPos]){
+      this.memChain.splice(0);
+      throw new Error ("You can\'t remove incorrect link!");
+    }
+    this.memChain.splice(memChainPos, 1);
+    return this;
   },
   reverseChain() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    this.memChain.reverse();
+    return this;
   },
   finishChain() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
-  },
+    let finalChain = this.memChain.join('~~');
+    this.memChain.splice(0);
+    return finalChain;
+  }
 };
 
 module.exports = {
